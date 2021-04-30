@@ -72,22 +72,21 @@ def create_model(df):
         train_test_split(features, label, test_size=0.3)
 
     # initialize model
-    model = DecisionTreeClassifier()
+    model = DecisionTreeClassifier(max_depth=2)
 
     # train it on training data
     model.fit(features_train, label_train)
 
-    # gather the model's predictions
+    # gather the model's predictions for train
+    train_predictions = model.predict(features_train)
+
+    # gather the model's predictions for test
     test_predictions = model.predict(features_test)
 
-    # print actual and prediction
-    print('Predictions: ')
-    print(test_predictions)
+    # calculate accuarcy of train
+    print('Accuracy: ', accuracy_score(label_train, train_predictions))
 
-    print('Actual: ')
-    print(label_test.values)
-
-    # calculate accuracy
+    # calculate accuracy of test
     print('Accuracy: ', accuracy_score(label_test, test_predictions))
 
 
